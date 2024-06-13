@@ -13,7 +13,7 @@ struct DHondtIntermediate {
 
 fn main() {
     const NUMBER_OF_SEATS: usize = 10;
-    let election = vec![
+    let election = [
         VotingResults {
             party: "A".to_string(),
             votes: 100,
