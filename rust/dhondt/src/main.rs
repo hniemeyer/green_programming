@@ -11,7 +11,11 @@ struct DHondtIntermediate {
 
 fn main() {
     const NUMBER_OF_SEATS: usize = 10;
-    let election = generate_data::generate_parties();
+    let election = generate_data::generate_parties(3);
+
+    for party in &election {
+        println!("Party: {}, Votes: {}", party.party, party.votes);
+    }
 
     let cart_product = (1..NUMBER_OF_SEATS + 1).cartesian_product(election.iter());
 
