@@ -1,10 +1,8 @@
 use itertools::Itertools;
 use std::collections::HashMap;
 
-struct VotingResults {
-    party: String,
-    votes: usize,
-}
+mod generate_data;
+mod voting;
 
 struct DHondtIntermediate {
     party: String,
@@ -13,20 +11,7 @@ struct DHondtIntermediate {
 
 fn main() {
     const NUMBER_OF_SEATS: usize = 10;
-    let election = [
-        VotingResults {
-            party: "A".to_string(),
-            votes: 100,
-        },
-        VotingResults {
-            party: "B".to_string(),
-            votes: 200,
-        },
-        VotingResults {
-            party: "C".to_string(),
-            votes: 300,
-        },
-    ];
+    let election = generate_data::generate_parties();
 
     let it = (1..NUMBER_OF_SEATS + 1).cartesian_product(election.iter());
 
