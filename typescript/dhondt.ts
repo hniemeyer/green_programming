@@ -9,6 +9,31 @@ interface Quotient {
     value: number;
 }
 
+
+function getRandomInt(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomName(length: number): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let name = '';
+    for (let i = 0; i < length; i++) {
+        name += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return name;
+}
+
+function generateRandomParties(numParties: number, maxVotes: number): Party[] {
+    const parties: Party[] = [];
+    for (let i = 0; i < numParties; i++) {
+        const nameLength = getRandomInt(1, 10);
+        const partyName = getRandomName(nameLength);
+        const votes = getRandomInt(0, maxVotes);
+        parties.push({ name: partyName, votes: votes, seats: 0 });
+    }
+    return parties;
+}
+
 function dHondt(parties: Party[], totalSeats: number): Party[] {
     // Initialize seats for each party to 0
     parties.forEach(party => {
@@ -39,12 +64,9 @@ function dHondt(parties: Party[], totalSeats: number): Party[] {
     return parties;
 }
 
-// Example usage:
-const parties: Party[] = [
-    { name: "Party A", votes: 1000, seats: 0 },
-    { name: "Party B", votes: 800, seats: 0 },
-    { name: "Party C", votes: 600, seats: 0 }
-];
+const numParties = 5;
+const maxVotes = 1000;
+const parties: Party[] = generateRandomParties(numParties, maxVotes);
 
 const totalSeats = 10;
 const result = dHondt(parties, totalSeats);
