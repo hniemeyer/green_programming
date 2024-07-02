@@ -11,10 +11,6 @@ struct Quotient {
     var value: Double
 }
 
-func getRandomInt(min: Int, max: Int) -> Int {
-    return Int.random(in: min...max)
-}
-
 func getRandomName(length: Int) -> String {
     let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     return String((0..<length).map { _ in characters.randomElement()! })
@@ -23,9 +19,9 @@ func getRandomName(length: Int) -> String {
 func generateRandomParties(numParties: Int, maxVotes: Int) -> [Party] {
     var parties: [Party] = []
     for _ in 0..<numParties {
-        let nameLength = getRandomInt(min: 1, max: 10)
+        let nameLength = Int.random(in: 1...10)
         let partyName = getRandomName(length: nameLength)
-        let votes = getRandomInt(min: 0, max: maxVotes)
+        let votes = Int.random(in: 0...maxVotes)
         parties.append(Party(name: partyName, votes: votes, seats: 0))
     }
     return parties
