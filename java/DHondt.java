@@ -4,28 +4,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-class Party {
-    String name;
-    int votes;
-    int seats;
-
-    Party(String name, int votes) {
-        this.name = name;
-        this.votes = votes;
-        this.seats = 0;
-    }
-}
-
-class Quotient {
-    int partyIndex;
-    double value;
-
-    Quotient(int partyIndex, double value) {
-        this.partyIndex = partyIndex;
-        this.value = value;
-    }
-}
-
 public class DHondt {
 
     private static Random random = new Random();
@@ -97,5 +75,27 @@ public class DHondt {
         for (Party party : result) {
             System.out.println("Party: " + party.name + ", Votes: " + party.votes + ", Seats: " + party.seats);
         }
+    }
+}
+
+class Party {
+    String name;
+    int votes;
+    int seats;
+
+    Party(String name, int votes) {
+        this.name = name;
+        this.votes = votes;
+        this.seats = 0;
+    }
+}
+
+class Quotient {
+    int partyIndex;
+    double value;
+
+    Quotient(int partyIndex, double value) {
+        this.partyIndex = partyIndex;
+        this.value = value;
     }
 }

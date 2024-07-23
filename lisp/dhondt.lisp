@@ -42,9 +42,9 @@
         (incf (party-seats (nth party-index parties)))))
     parties))
 
-(let* ((num-parties 5)
+(let* ((num-parties 1000)
        (max-votes 1000)
        (parties (generate-random-parties num-parties max-votes))
-       (total-seats 10)
+       (total-seats 500)
        (result (d-hondt parties total-seats)))
   (print result))
