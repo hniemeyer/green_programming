@@ -1,26 +1,21 @@
 from codecarbon import EmissionsTracker
-import numpy as np
+import os
 
-with EmissionsTracker(project_name="large") as tracker:
-     # Compute intensive code goes here
-     for idx in range(10):
-          print(idx)
-          a = np.random.randn(10000, 10000)
-          b = np.random.randn(10000, 10000)
-          c = a*b
+if os.path.exists("emissions.csv"):
+     os.remove("emissions.csv")
 
-with EmissionsTracker(project_name="medium") as tracker:
-     # Compute intensive code goes here
-     for idx in range(10):
-          print(idx)
-          a = np.random.randn(1000, 1000)
-          b = np.random.randn(1000, 1000)
-          c = a*b
+with EmissionsTracker(project_name="ruby") as tracker:
+     os.system("ruby ./ruby/dhondt.rb")
 
-with EmissionsTracker(project_name="small") as tracker:
-     # Compute intensive code goes here
-     for idx in range(10):
-          print(idx)
-          a = np.random.randn(10, 10)
-          b = np.random.randn(10, 10)
-          c = a*b
+with EmissionsTracker(project_name="lua") as tracker:
+     os.system("lua ./lua/dhondt.lua")
+
+with EmissionsTracker(project_name="lisp") as tracker:
+     os.system("clisp ./lisp/dhondt.lisp")
+
+with EmissionsTracker(project_name="elixir") as tracker:
+     os.system("elixir ./elixir/dhondt.ex")
+
+os.system("cargo build --manifest-path=./rust/dhondt/Cargo.toml --release")
+with EmissionsTracker(project_name="rust") as tracker:
+     os.system("cargo run --manifest-path=./rust/dhondt/Cargo.toml --release")
