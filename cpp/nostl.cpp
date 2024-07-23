@@ -117,23 +117,17 @@ const char* random_party_name() {
 int main() 
 {
 
-    int num_parties = 10;
+    int num_parties = 1000;
     int max_votes = 1000;
-
-    // Dynamically allocate array of party names
-    const char** parties = new const char*[num_parties];
-    for (int i = 0; i < num_parties; ++i) {
-        parties[i] = random_party_name();
-    }
 
     // Generate random party_and_proportional_votes
     party_and_votes* votes = new party_and_votes[num_parties];
     for (int i = 0; i < num_parties; ++i) {
-        votes[i].party = parties[i];
-        votes[i].votes = random_int(1.0, max_votes);
+        votes[i].party = random_party_name();
+        votes[i].votes = random_int(1, max_votes);
     }
 
-    party_and_seats* result = hondt_method(votes, num_parties, 10);
+    party_and_seats* result = hondt_method(votes, num_parties, 500);
     for(int i = 0; i < num_parties; ++i)
     {
         std::cout << result[i].party << " " << result[i].votes << "\n";

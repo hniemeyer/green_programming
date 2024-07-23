@@ -4,6 +4,10 @@ import os
 if os.path.exists("emissions.csv"):
      os.remove("emissions.csv")
 
+os.system("g++-12 ./cpp/nostl.cpp -O3 -o ./cpp/nostl")
+with EmissionsTracker(project_name="cpp nostl") as tracker:
+     os.system("./cpp/nostl")
+
 with EmissionsTracker(project_name="ruby") as tracker:
      os.system("ruby ./ruby/dhondt.rb")
 
