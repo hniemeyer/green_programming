@@ -81,11 +81,11 @@ function dHondt(parties, totalSeats)
 end
 
 -- Main script
-local numParties = 5
+local numParties = 1000
 local maxVotes = 1000
 local parties = generateRandomParties(numParties, maxVotes)
 
-local totalSeats = 10
+local totalSeats = 500
 local result = dHondt(parties, totalSeats)
 
 for _, party in ipairs(result) do

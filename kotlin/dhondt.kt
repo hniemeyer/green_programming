@@ -61,11 +61,11 @@ fun dHondt(parties: List<Party>, totalSeats: Int): List<Party> {
 }
 
 fun main() {
-    val numParties = 5
+    val numParties = 1000
     val maxVotes = 1000
     val parties = generateRandomParties(numParties, maxVotes)
 
-    val totalSeats = 10
+    val totalSeats = 500
     val result = dHondt(parties, totalSeats)
     println(result)
 }

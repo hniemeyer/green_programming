@@ -64,10 +64,10 @@ function dHondt(parties: Party[], totalSeats: number): Party[] {
     return parties;
 }
 
-const numParties = 5;
+const numParties = 1000;
 const maxVotes = 1000;
 const parties: Party[] = generateRandomParties(numParties, maxVotes);
 
-const totalSeats = 10;
+const totalSeats = 500;
 const result = dHondt(parties, totalSeats);
 console.log(result);

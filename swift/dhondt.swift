@@ -56,10 +56,10 @@ func dHondt(parties: [Party], totalSeats: Int) -> [Party] {
     return parties
 }
 
-let numParties = 5
+let numParties = 1000
 let maxVotes = 1000
 let parties = generateRandomParties(numParties: numParties, maxVotes: maxVotes)
 
-let totalSeats = 10
+let totalSeats = 500
 let result = dHondt(parties: parties, totalSeats: totalSeats)
 print(result)

@@ -34,10 +34,10 @@ defmodule Election do
   end
 end
 
-num_parties = 5
+num_parties = 1000
 max_votes = 1000
 parties = Election.generate_random_parties(num_parties, max_votes)
 
-total_seats = 10
+total_seats = 500
 result = Election.dhondt(parties, total_seats)
 IO.inspect(result)

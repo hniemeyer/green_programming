@@ -68,11 +68,11 @@ class Party
     parties
   end
   
-  num_parties = 5
+  num_parties = 1000
   max_votes = 1000
   parties = generate_random_parties(num_parties, max_votes)
   
-  total_seats = 10
+  total_seats = 500
   result = d_hondt(parties, total_seats)
   puts result.map { |party| "#{party.name}: #{party.votes} votes, #{party.seats} seats" }
   

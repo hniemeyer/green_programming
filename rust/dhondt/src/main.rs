@@ -10,8 +10,8 @@ struct DHondtIntermediate {
 }
 
 fn main() {
-    const NUMBER_OF_SEATS: usize = 750;
-    let election = generate_data::generate_parties(85);
+    const NUMBER_OF_SEATS: usize = 500;
+    let election = generate_data::generate_parties(1000);
 
     for party in &election {
         println!("Party: {}, Votes: {}", party.party, party.votes);
