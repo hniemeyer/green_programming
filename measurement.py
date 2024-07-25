@@ -4,6 +4,10 @@ import os
 if os.path.exists("emissions.csv"):
      os.remove("emissions.csv")
 
+os.system("gcc-12 c/dhondt.c -std=c2x -o c/dhondt")
+with EmissionsTracker(project_name="c") as tracker:
+     os.system("./c/dhondt")
+
 os.system("g++-12 ./cpp/nostl.cpp -O3 -o ./cpp/nostl")
 with EmissionsTracker(project_name="cpp nostl") as tracker:
      os.system("./cpp/nostl")
