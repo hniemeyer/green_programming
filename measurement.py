@@ -5,6 +5,10 @@ import subprocess
 if os.path.exists("emissions.csv"):
      os.remove("emissions.csv")
 
+os.system("dotnet build -c Release ./csharp/DhondtCalculator")
+with EmissionsTracker(project_name="csharp") as tracker:
+     os.system("dotnet run -c Release  --project ./csharp/DhondtCalculator/")
+
 sp = subprocess.Popen([r"/bin/bash", "-i", "-c", "source ~/dlang/dmd-2.109.1/activate; dmd -O dlang/dhondt.d -of=./dlang/dlangdhondt -od=./dlang"])
 sp.communicate()
 with EmissionsTracker(project_name="d") as tracker:

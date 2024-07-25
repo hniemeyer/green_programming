@@ -4,3 +4,5 @@ cpp/ranges
 c/dhondt
 dlang/dlangdhondt
 dlang/dlangdhondt.o
+csharp/DhondtCalculator/bin
+csharp/DhondtCalculator/obj
