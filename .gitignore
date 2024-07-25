@@ -2,5 +2,5 @@ cpp/stl
 cpp/nostl
 cpp/ranges
 c/dhondt
-dlang/dhondt
-dlang/dhondt.o
+dlang/dlangdhondt
+dlang/dlangdhondt.o

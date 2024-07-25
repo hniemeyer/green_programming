@@ -3,6 +3,9 @@ import std.range;
 import std.container;
 import std.typecons;
 import std.algorithm;
+import std.random;
+import std.array;
+import std.conv : to;
 
 struct party_and_votes
 {
@@ -22,7 +25,7 @@ struct party_and_seats
     ulong seats;
 }
 
-auto hondt_method(immutable party_and_votes[] votes_per_party, immutable int total_number_of_seats)
+auto hondt_method(party_and_votes[] votes_per_party, immutable int total_number_of_seats)
 {
     auto proportional_votes = new party_and_proportional_votes[votes_per_party.length * total_number_of_seats];
     auto idx = 0;
@@ -47,21 +50,43 @@ auto hondt_method(immutable party_and_votes[] votes_per_party, immutable int tot
     return distribution;
 }
 
+string generateRandomPartyName()
+{
+    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    int length = uniform(1, 11); // Random length between 1 and 10
+    string name;
+    foreach (i; 0 .. length)
+    {
+        name ~= alphabet[uniform(0, alphabet.length)];
+    }
+    return name;
+}
+
+party_and_votes generateRandomPartyVotes(int maxVotes)
+{
+    auto randParty = generateRandomPartyName();
+    auto randVotes = uniform(0, maxVotes);
+    return party_and_votes(randParty, randVotes);
+}
+
+auto generateRandomData(int count)
+{
+    int maxVotes = 1000;
+
+    party_and_votes[] data;
+    foreach (i; 0 .. count)
+    {
+        data ~= generateRandomPartyVotes(maxVotes);
+    }
+
+    return data;
+}
+
 void main()
 {
-    immutable auto votes = [party_and_votes("party_1", 110), 
-                            party_and_votes("party_2", 85), 
-                            party_and_votes("party_3", 35)];
+    auto votes = generateRandomData(1000);
 
-    immutable auto result = hondt_method(votes, 7);
+    auto result = hondt_method(votes, 500);
 
     writeln(result);
-
-    immutable auto votes2 = [party_and_votes("party_1", 10000), 
-                             party_and_votes("party_2", 6000), 
-                             party_and_votes("party_3", 1500)];
-
-    immutable auto result2 = hondt_method(votes2, 8);
-
-    writeln(result2);
 }

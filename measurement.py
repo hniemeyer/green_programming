@@ -1,8 +1,14 @@
 from codecarbon import EmissionsTracker
 import os
+import subprocess
 
 if os.path.exists("emissions.csv"):
      os.remove("emissions.csv")
+
+sp = subprocess.Popen([r"/bin/bash", "-i", "-c", "source ~/dlang/dmd-2.109.1/activate; dmd -O dlang/dhondt.d -of=./dlang/dlangdhondt -od=./dlang"])
+sp.communicate()
+with EmissionsTracker(project_name="d") as tracker:
+     os.system("./dlang/dlangdhondt")
 
 os.system("gcc-12 c/dhondt.c -std=c2x -o c/dhondt")
 with EmissionsTracker(project_name="c") as tracker:
