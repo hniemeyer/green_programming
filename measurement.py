@@ -49,3 +49,6 @@ with EmissionsTracker(project_name="swift") as tracker:
 os.system("tsc ./typescript/dhondt.ts")
 with EmissionsTracker(project_name="typescript") as tracker:
      os.system("node ./typescript/dhondt.js")
+
+with EmissionsTracker(project_name="python") as tracker:
+     os.system("python3 python/dhondt.py")
