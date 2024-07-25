@@ -32,7 +32,7 @@ auto hondt_method(const std::map<std::string, int>& votes_per_party, const int t
     return distribution;
 }
 
-double random_int(int min, int max) {
+int random_int(int min, int max) {
     static std::random_device rd;  
     static std::mt19937 gen(rd()); 
     std::uniform_real_distribution<> dis(min, max);
