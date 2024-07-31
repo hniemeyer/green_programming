@@ -23,32 +23,19 @@ class Program
     static void Main()
     {
 
-        int numParties = 1000;
-        int maxVotes = 1000;
-        int numSeats = 500;
+        int numParties = 10;
+        int numSeats = 50000;
 
         var votes = new Dictionary<string, int>();
-
-        Random random = new Random();
 
         string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
         for (int i = 0; i < numParties; i++)
         {
-            // Generate a random string length between 1 and 10
-            int stringLength = random.Next(1, 11);
+            // Convert character array element to string
+            string key = chars.Substring(i, 1);
 
-            char[] randomString = new char[stringLength];
-            for (int j = 0; j < stringLength; j++)
-            {
-                randomString[j] = chars[random.Next(chars.Length)];
-            }
-
-            // Convert character array to string
-            string key = new string(randomString);
-
-            // Generate a random integer between 1 and maxInts
-            int value = random.Next(1, maxVotes + 1);
+            int value = (i + 1) * 1000;
 
             // Add to the dictionary
             votes[key] = value;

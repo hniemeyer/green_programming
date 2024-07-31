@@ -3,7 +3,6 @@ import std.range;
 import std.container;
 import std.typecons;
 import std.algorithm;
-import std.random;
 import std.array;
 import std.conv : to;
 
@@ -50,33 +49,16 @@ auto hondt_method(party_and_votes[] votes_per_party, immutable int total_number_
     return distribution;
 }
 
-string generateRandomPartyName()
+auto generateData(int count)
 {
+    int voteFactor = 1000;
     string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    int length = uniform(1, 11); // Random length between 1 and 10
-    string name;
-    foreach (i; 0 .. length)
-    {
-        name ~= alphabet[uniform(0, alphabet.length)];
-    }
-    return name;
-}
-
-party_and_votes generateRandomPartyVotes(int maxVotes)
-{
-    auto randParty = generateRandomPartyName();
-    auto randVotes = uniform(0, maxVotes);
-    return party_and_votes(randParty, randVotes);
-}
-
-auto generateRandomData(int count)
-{
-    int maxVotes = 1000;
-
     party_and_votes[] data;
     foreach (i; 0 .. count)
     {
-        data ~= generateRandomPartyVotes(maxVotes);
+        string name;
+        name ~= alphabet[i];
+        data ~= party_and_votes(name,(i+1)*1000);
     }
 
     return data;
@@ -84,9 +66,9 @@ auto generateRandomData(int count)
 
 void main()
 {
-    auto votes = generateRandomData(1000);
+    auto votes = generateData(10);
 
-    auto result = hondt_method(votes, 500);
+    auto result = hondt_method(votes, 50000);
 
     writeln(result);
 }

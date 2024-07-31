@@ -2,31 +2,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 public class DHondt {
 
-    private static Random random = new Random();
-
-    public static int getRandomInt(int min, int max) {
-        return random.nextInt((max - min) + 1) + min;
-    }
-
-    public static String getRandomName(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        StringBuilder name = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            name.append(characters.charAt(random.nextInt(characters.length())));
-        }
-        return name.toString();
-    }
-
-    public static List<Party> generateRandomParties(int numParties, int maxVotes) {
+    public static List<Party> generateParties(int numParties) {
         List<Party> parties = new ArrayList<>();
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        
         for (int i = 0; i < numParties; i++) {
-            int nameLength = getRandomInt(1, 10);
-            String partyName = getRandomName(nameLength);
-            int votes = getRandomInt(0, maxVotes);
+            StringBuilder name = new StringBuilder();
+            name.append(characters.charAt(i));
+            String partyName = name.toString();
+            int votes = (i+1)*1000;
             parties.add(new Party(partyName, votes));
         }
         return parties;
@@ -65,11 +52,10 @@ public class DHondt {
     }
 
     public static void main(String[] args) {
-        int numParties = 5;
-        int maxVotes = 1000;
-        List<Party> parties = generateRandomParties(numParties, maxVotes);
+        int numParties = 10;
+        List<Party> parties = generateParties(numParties);
 
-        int totalSeats = 10;
+        int totalSeats = 50000;
         List<Party> result = dHondt(parties, totalSeats);
 
         for (Party party : result) {

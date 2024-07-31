@@ -1,20 +1,9 @@
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-function getRandomName(length) {
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    var name = '';
-    for (var i = 0; i < length; i++) {
-        name += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return name;
-}
-function generateRandomParties(numParties, maxVotes) {
+function generateParties(numParties) {
     var parties = [];
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     for (var i = 0; i < numParties; i++) {
-        var nameLength = getRandomInt(1, 10);
-        var partyName = getRandomName(nameLength);
-        var votes = getRandomInt(0, maxVotes);
+        var partyName = characters.charAt(i);
+        var votes = (i + 1) * 1000;
         parties.push({ name: partyName, votes: votes, seats: 0 });
     }
     return parties;
@@ -43,9 +32,8 @@ function dHondt(parties, totalSeats) {
     }
     return parties;
 }
-var numParties = 1000;
-var maxVotes = 1000;
-var parties = generateRandomParties(numParties, maxVotes);
-var totalSeats = 500;
+var numParties = 10;
+var parties = generateParties(numParties);
+var totalSeats = 50000;
 var result = dHondt(parties, totalSeats);
 console.log(result);

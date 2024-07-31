@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 typedef struct 
 {
@@ -67,35 +66,20 @@ party_and_seats* hondt_method(party_and_votes* votes_per_party, int party_count,
     return seats;
 }
 
-int random_int(int min, int max) {
-    return min + (rand() / (RAND_MAX / (max - min)));
-}
-
-char* random_party_name() {
-    static const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    int length = rand() % 10 + 1; // Length between 1 and 10
-    char* party_name = (char*)malloc((length + 1) * sizeof(char));
-    if (!party_name) {
-        return NULL; // Check for memory allocation failure
-    }
-    for (int i = 0; i < length; ++i) {
-        party_name[i] = charset[rand() % (sizeof(charset) - 1)];
-    }
-    party_name[length] = '\0';
-    return party_name;
-}
-
 int main() 
 {
-    int num_parties = 1000;
-    int max_votes = 1000;
-    int number_of_seats = 500;
+    int num_parties = 10;
+    int number_of_seats = 50000;
 
     party_and_votes* votes = (party_and_votes*)malloc(num_parties * sizeof(party_and_votes));
+    char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     for (int i = 0; i < num_parties; ++i) {
-        votes[i].party = random_party_name();  
-        votes[i].votes = random_int(1,max_votes);          // Example vote count
+        char* party_name = (char*)malloc((2) * sizeof(char));
+        party_name[0] = charset[i];
+        party_name[1] = '\0';
+        votes[i].party = party_name;  
+        votes[i].votes = (i+1)*1000;
     }
 
     party_and_seats* result = hondt_method(votes, num_parties, number_of_seats);

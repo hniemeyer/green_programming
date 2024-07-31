@@ -32,42 +32,17 @@ auto hondt_method(const std::map<std::string, int>& votes_per_party, const int t
     return distribution;
 }
 
-int random_int(int min, int max) {
-    static std::random_device rd;  
-    static std::mt19937 gen(rd()); 
-    std::uniform_real_distribution<> dis(min, max);
-    return dis(gen);
-}
-
-
-std::string random_party_name() {
-    const static std::string charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
-    std::uniform_int_distribution<> len_dis(1, 10);
-    std::uniform_int_distribution<> char_dis(0, charset.size() - 1);
-
-    int length = len_dis(gen);
-    std::string random_string;
-    random_string.reserve(length);
-
-    for (int i = 0; i < length; ++i) {
-        random_string += charset[char_dis(gen)];
-    }
-
-    return random_string;
-}
-
 int main()
 {
-    int num_parties = 1000;
-    int max_votes = 1000;
+    int num_parties = 10;
+    const std::string charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     auto votes = std::map<std::string, int>();
     for (int i=0; i<num_parties; ++i) {
-        votes[random_party_name()] = random_int(1,max_votes);
+        std::string party_name = charset.substr(i,1);
+        votes[party_name] = (i+1)*1000;
     }
 
-    const auto distribution = hondt_method(votes, 500);
+    const auto distribution = hondt_method(votes, 50000);
     for (const auto& vote : distribution)
     {
         std::cout << vote.first << " " << vote.second << "\n";
