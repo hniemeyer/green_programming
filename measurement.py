@@ -22,10 +22,6 @@ os.system("g++-14 ./cpp/ranges.cpp -std=c++23 -O3 -o ./cpp/ranges")
 with EmissionsTracker(project_name="cpp ranges") as tracker:
      os.system("./cpp/ranges")
 
-os.system("g++-12 ./cpp/nostl.cpp -O3 -o ./cpp/nostl")
-with EmissionsTracker(project_name="cpp nostl") as tracker:
-     os.system("./cpp/nostl")
-
 os.system("g++-12 ./cpp/stl.cpp -O3 -std=c++23 -o ./cpp/stl")
 with EmissionsTracker(project_name="cpp stl") as tracker:
      os.system("./cpp/stl")
