@@ -11,17 +11,13 @@ struct Quotient {
     var value: Double
 }
 
-func getRandomName(length: Int) -> String {
-    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    return String((0..<length).map { _ in characters.randomElement()! })
-}
-
-func generateRandomParties(numParties: Int, maxVotes: Int) -> [Party] {
+func generateParties(numParties: Int) -> [Party] {
     var parties: [Party] = []
-    for _ in 0..<numParties {
-        let nameLength = Int.random(in: 1...10)
-        let partyName = getRandomName(length: nameLength)
-        let votes = Int.random(in: 0...maxVotes)
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    for idx in 0..<numParties {
+        let character = characters[characters.index(characters.startIndex, offsetBy: idx)]
+        let partyName = String(character)
+        let votes = (idx+1)*1000
         parties.append(Party(name: partyName, votes: votes, seats: 0))
     }
     return parties
@@ -56,10 +52,9 @@ func dHondt(parties: [Party], totalSeats: Int) -> [Party] {
     return parties
 }
 
-let numParties = 1000
-let maxVotes = 1000
-let parties = generateRandomParties(numParties: numParties, maxVotes: maxVotes)
+let numParties = 10
+let parties = generateParties(numParties: numParties)
 
-let totalSeats = 500
+let totalSeats = 50000
 let result = dHondt(parties: parties, totalSeats: totalSeats)
 print(result)
