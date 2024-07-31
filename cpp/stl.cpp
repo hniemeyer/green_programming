@@ -32,32 +32,6 @@ auto hondt_method(const std::map<std::string, int>& votes_per_party, const int t
     return distribution;
 }
 
-int random_int(int min, int max) {
-    static std::random_device rd;  
-    static std::mt19937 gen(rd()); 
-    std::uniform_real_distribution<> dis(min, max);
-    return dis(gen);
-}
-
-
-std::string random_party_name() {
-    const static std::string charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
-    std::uniform_int_distribution<> len_dis(1, 10);
-    std::uniform_int_distribution<> char_dis(0, charset.size() - 1);
-
-    int length = len_dis(gen);
-    std::string random_string;
-    random_string.reserve(length);
-
-    for (int i = 0; i < length; ++i) {
-        random_string += charset[char_dis(gen)];
-    }
-
-    return random_string;
-}
-
 int main()
 {
     int num_parties = 10;
