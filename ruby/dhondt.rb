@@ -17,26 +17,16 @@ class Party
     end
   end
   
-  def get_random_int(min, max)
-    rand(min..max)
-  end
-  
-  def get_random_name(length)
-    characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-    name = ''
-    length.times do
-      name += characters[rand(characters.length)]
-    end
-    name
-  end
-  
-  def generate_random_parties(num_parties, max_votes)
+   
+  def generate_parties(num_parties)
     parties = []
+    characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    idx = 0
     num_parties.times do
-      name_length = get_random_int(1, 10)
-      party_name = get_random_name(name_length)
-      votes = get_random_int(0, max_votes)
+      party_name = characters[idx]
+      votes = (idx+1)*1000
       parties << Party.new(party_name, votes)
+      idx = idx + 1
     end
     parties
   end
@@ -68,11 +58,10 @@ class Party
     parties
   end
   
-  num_parties = 1000
-  max_votes = 1000
-  parties = generate_random_parties(num_parties, max_votes)
+  num_parties = 10
+  parties = generate_parties(num_parties)
   
-  total_seats = 500
+  total_seats = 50000
   result = d_hondt(parties, total_seats)
   puts result.map { |party| "#{party.name}: #{party.votes} votes, #{party.seats} seats" }
   
