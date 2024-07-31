@@ -9,26 +9,12 @@ interface Quotient {
     value: number;
 }
 
-
-function getRandomInt(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRandomName(length: number): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    let name = '';
-    for (let i = 0; i < length; i++) {
-        name += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return name;
-}
-
-function generateRandomParties(numParties: number, maxVotes: number): Party[] {
+function generateParties(numParties: number): Party[] {
     const parties: Party[] = [];
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     for (let i = 0; i < numParties; i++) {
-        const nameLength = getRandomInt(1, 10);
-        const partyName = getRandomName(nameLength);
-        const votes = getRandomInt(0, maxVotes);
+        const partyName = characters.charAt(i);
+        const votes = (i + 1) * 1000;
         parties.push({ name: partyName, votes: votes, seats: 0 });
     }
     return parties;
@@ -64,10 +50,9 @@ function dHondt(parties: Party[], totalSeats: number): Party[] {
     return parties;
 }
 
-const numParties = 1000;
-const maxVotes = 1000;
-const parties: Party[] = generateRandomParties(numParties, maxVotes);
+const numParties = 10;
+const parties: Party[] = generateParties(numParties);
 
-const totalSeats = 500;
+const totalSeats = 50000;
 const result = dHondt(parties, totalSeats);
 console.log(result);
