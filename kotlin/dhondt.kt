@@ -1,4 +1,3 @@
-import kotlin.random.Random
 
 data class Party(
     var name: String,
@@ -11,26 +10,14 @@ data class Quotient(
     val value: Double
 )
 
-fun getRandomInt(min: Int, max: Int): Int {
-    return Random.nextInt(min, max + 1)
-}
-
-fun getRandomName(length: Int): String {
-    val characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    var name = ""
-    for (i in 0 until length) {
-        name += characters[Random.nextInt(characters.length)]
-    }
-    return name
-}
-
-fun generateRandomParties(numParties: Int, maxVotes: Int): List<Party> {
+fun generateRandomParties(numParties: Int): List<Party> {
     val parties = mutableListOf<Party>()
+    val characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     for (i in 0 until numParties) {
-        val nameLength = getRandomInt(1, 10)
-        val partyName = getRandomName(nameLength)
-        val votes = getRandomInt(0, maxVotes)
-        parties.add(Party(partyName, votes, 0))
+        var name = ""
+        name += characters[i]
+        val votes = (i+1)*1000
+        parties.add(Party(name, votes, 0))
     }
     return parties
 }
@@ -61,11 +48,10 @@ fun dHondt(parties: List<Party>, totalSeats: Int): List<Party> {
 }
 
 fun main() {
-    val numParties = 1000
-    val maxVotes = 1000
-    val parties = generateRandomParties(numParties, maxVotes)
+    val numParties = 10
+    val parties = generateRandomParties(numParties)
 
-    val totalSeats = 500
+    val totalSeats = 50000
     val result = dHondt(parties, totalSeats)
     println(result)
 }
