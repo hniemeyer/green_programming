@@ -1,14 +1,3 @@
-(defun get-random-int (min max)
-  (+ min (random (+ 1 (- max min)))))
-
-(defun get-random-name (length)
-  (let ((characters "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
-        (name ""))
-    (dotimes (i length)
-      (setf name (concatenate 'string name 
-                              (string (elt characters (random (length characters)))))))
-    name))
-
 (defstruct party
   name
   votes
@@ -18,14 +7,13 @@
   party-index
   value)
 
-(defun generate-random-parties (num-parties max-votes)
+(defun generate-parties (num-parties)
   (let ((parties '()))
     (dotimes (i num-parties)
-      (let* ((name-length (get-random-int 1 10))
-             (party-name (get-random-name name-length))
-             (votes (get-random-int 0 max-votes)))
+      (let* ((party-name (string (code-char (+ 65 i)))) ; ASCII 65 corresponds to 'A'
+             (votes (* (1+ i) 1000))) ; (1+ i) to start from 1, not 0
         (push (make-party :name party-name :votes votes :seats 0) parties)))
-    parties))
+    (reverse parties))) ; Reverse to maintain the original order since 'push' adds to the front
 
 (defun d-hondt (parties total-seats)
   (dolist (party parties)
@@ -42,9 +30,8 @@
         (incf (party-seats (nth party-index parties)))))
     parties))
 
-(let* ((num-parties 1000)
-       (max-votes 1000)
-       (parties (generate-random-parties num-parties max-votes))
-       (total-seats 500)
+(let* ((num-parties 10)
+       (parties (generate-parties num-parties))
+       (total-seats 50000)
        (result (d-hondt parties total-seats)))
   (print result))
