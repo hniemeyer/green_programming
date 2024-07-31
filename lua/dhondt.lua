@@ -24,29 +24,13 @@ function Quotient:new(partyIndex, value)
     return quotient
 end
 
--- Function to get a random integer
-function getRandomInt(min, max)
-    return math.floor(math.random() * (max - min + 1)) + min
-end
-
--- Function to get a random name of given length
-function getRandomName(length)
+-- Function to generate parties
+function generateParties(numParties)
     local characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-    local name = ''
-    for i = 1, length do
-        local index = math.floor(math.random() * #characters) + 1
-        name = name .. characters:sub(index, index)
-    end
-    return name
-end
-
--- Function to generate random parties
-function generateRandomParties(numParties, maxVotes)
     local parties = {}
     for i = 1, numParties do
-        local nameLength = getRandomInt(1, 10)
-        local partyName = getRandomName(nameLength)
-        local votes = getRandomInt(0, maxVotes)
+        local partyName = characters:sub(i,i)
+        local votes = i*1000
         table.insert(parties, Party:new(partyName, votes, 0))
     end
     return parties
@@ -81,11 +65,10 @@ function dHondt(parties, totalSeats)
 end
 
 -- Main script
-local numParties = 1000
-local maxVotes = 1000
-local parties = generateRandomParties(numParties, maxVotes)
+local numParties = 10
+local parties = generateParties(numParties)
 
-local totalSeats = 500
+local totalSeats = 50000
 local result = dHondt(parties, totalSeats)
 
 for _, party in ipairs(result) do
