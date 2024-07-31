@@ -1,4 +1,3 @@
-import random
 
 def hondt_method(votes_per_party, total_number_of_seats):
     proportional_votes = []
@@ -22,10 +21,10 @@ def hondt_method(votes_per_party, total_number_of_seats):
 
 
 if __name__ == "__main__":
-    num_parties = 1000
-    num_votes = 1000
-    num_seats = 500
+    num_parties = 10
+    num_seats = 50000
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
     votes = {}
     for idx in range(num_parties):
-        votes["".join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", k=10))] = random.randint(0, num_votes)
+        votes[alphabet[idx]] = (idx+1)*1000
     print(hondt_method(votes, num_seats))
