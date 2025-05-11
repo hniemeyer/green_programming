@@ -1,7 +1,6 @@
 use rand::Rng;
 
 fn main() {
-    // Parse number of iterations from command line or default
     let iterations: u64 = 10_000_000; // Default to 10 million iterations
 
     let pi_estimate = monte_carlo_pi(iterations);
