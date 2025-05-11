@@ -16,7 +16,7 @@ fn adler32(data: &[u8]) -> u32 {
 }
 
 fn main() {
-    let data = vec![0u8; 50_000_000];
+    let data: Vec<u8> = rand::random_iter().take(50_000_000).collect();
     let checksum = adler32(&data);
     println!("Adler-32 checksum: {:#010x}", checksum);
 }
