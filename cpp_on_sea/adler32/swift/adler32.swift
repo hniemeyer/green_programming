@@ -1,20 +1,26 @@
 import Foundation
 
-func estimatePi(iterations: Int) {
-    var insideCircle = 0
-    for _ in 0..<iterations {
-        // Generate random x, y in [-1, 1]
-        let x = Double.random(in: -1...1)
-        let y = Double.random(in: -1...1)
-        if x*x + y*y <= 1 {
-            insideCircle += 1
-        }
+func adler32Checksum(data: [UInt8]) -> UInt32 {
+    let modAdler: UInt32 = 65521
+    var a: UInt32 = 1
+    var b: UInt32 = 0
+
+    for byte in data {
+        a = (a + UInt32(byte)) % modAdler
+        b = (b + a) % modAdler
     }
-    // Ratio of points inside circle to total times 4 gives Pi
-    let piEstimate = 4.0 * Double(insideCircle) / Double(iterations)
-    print("Estimated Pi (\(iterations) iterations): \(piEstimate)")
+
+    return (b << 16) | a
 }
 
-// Run the Monte Carlo estimation
-let monteCarloIterations = 10_000_000
-estimatePi(iterations: monteCarloIterations)
+// Generate or load 50 million bytes of data
+let dataCount = 50_000_000
+var byteArray = [UInt8]() 
+byteArray.reserveCapacity(dataCount)
+for _ in 0..<dataCount {
+    byteArray.append(UInt8.random(in: 0...255))
+}
+
+// Compute Adler-32
+let checksum = adler32Checksum(data: byteArray)
+print(String(format: "Adler-32 Checksum: 0x%08X", checksum))
