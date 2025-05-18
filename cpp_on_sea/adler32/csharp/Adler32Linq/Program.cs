@@ -20,7 +20,7 @@ public class Adler32
     public static void Main()
     {
         byte[] data = { 1, 2, 3, 4, 5 };
-        uint checksum1 = ComputeChecksum(data);
+        uint checksum1 = ComputeChecksumWithLinq(data);
         Console.WriteLine("Adler-32 Checksumme: " + checksum1);
     }
 }

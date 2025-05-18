@@ -1,3 +1,5 @@
+import Bitwise
+
 defmodule DataGenerator do
   @moduledoc """
   Generate a list of random unsigned 8-bit integers (bytes).

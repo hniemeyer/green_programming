@@ -40,4 +40,3 @@ if __FILE__ == $0
   puts "\nAdler-32 checksum: \#{checksum}"
 
 end
-s
