@@ -19,8 +19,15 @@ public class Adler32
 
     public static void Main()
     {
-        byte[] data = { 1, 2, 3, 4, 5 };
-        uint checksum1 = ComputeChecksumWithLinq(data);
+        const int N = 50_000_000;  // 50 million elements
+
+        // Allocate a byte[] on the heap
+        byte[] array = new byte[N];
+
+        // Fill with random bytes
+        Random rnd = new Random();  
+        rnd.NextBytes(array);
+        uint checksum1 = ComputeChecksumWithLinq(array);
         Console.WriteLine("Adler-32 Checksumme: " + checksum1);
     }
 }

@@ -47,8 +47,8 @@ with EmissionsTracker(project_name="ruby", log_level="error") as tracker:
 with EmissionsTracker(project_name="lua", log_level="error") as tracker:
      os.system("lua ./lua/adler32.lua")
 
-with EmissionsTracker(project_name="elixir", log_level="error") as tracker:
-     os.system("elixir ./elixir/adler32.ex")
+# with EmissionsTracker(project_name="elixir", log_level="error") as tracker:
+#      os.system("elixir ./elixir/adler32.ex")
 
 with EmissionsTracker(project_name="java", log_level="error") as tracker:
      os.system("java ./java/Adler32Checksum.java")

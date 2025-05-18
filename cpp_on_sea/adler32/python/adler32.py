@@ -1,3 +1,5 @@
+import os
+
 def adler32(data):
     mod_adler = 65521
     a = 1
@@ -10,6 +12,8 @@ def adler32(data):
     return (b << 16) | a
 
 if __name__ == "__main__":
-    data = bytes([1, 2, 3, 4, 5]) 
-    checksum = adler32(data)
+    
+    # os.urandom returns a bytes object of length N, you can wrap it in bytearray if you need mutability:
+    arr = bytearray(os.urandom(50_000_000))
+    checksum = adler32(arr)
     print(checksum)
