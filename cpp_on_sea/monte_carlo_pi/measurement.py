@@ -47,8 +47,9 @@ with EmissionsTracker(project_name="ruby", log_level="error") as tracker:
 with EmissionsTracker(project_name="lua", log_level="error") as tracker:
      os.system("lua ./lua/monte_carlo_pi.lua")
 
-with EmissionsTracker(project_name="elixir", log_level="error") as tracker:
-     os.system("elixir ./elixir/montecarlopi.ex")
+# crashes with memory problems
+# with EmissionsTracker(project_name="elixir", log_level="error") as tracker:
+#      os.system("elixir ./elixir/montecarlopi.ex")
 
 with EmissionsTracker(project_name="java", log_level="error") as tracker:
      os.system("java ./java/MonteCarloPi.java")
