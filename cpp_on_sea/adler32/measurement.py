@@ -65,8 +65,9 @@ os.system("kotlinc ./kotlin/adler32.kt -include-runtime -d ./kotlin/adler32.jar"
 with EmissionsTracker(project_name="kotlin", log_level="error") as tracker:
      os.system("java -jar ./kotlin/adler32.jar")
 
+os.system("swift build -c release --package-path swift/adler32")
 with EmissionsTracker(project_name="swift", log_level="error") as tracker:
-     os.system("swift ./swift/adler32.swift")
+     os.system("./swift/adler32/.build/release/adler32")
 
 os.system("tsc ./typescript/adler32.ts")
 with EmissionsTracker(project_name="typescript", log_level="error") as tracker:
