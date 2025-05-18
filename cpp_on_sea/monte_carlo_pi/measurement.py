@@ -67,7 +67,7 @@ with EmissionsTracker(project_name="kotlin", log_level="error") as tracker:
 
 os.system("swift build -c release --package-path swift/montecarlopi")
 with EmissionsTracker(project_name="swift", log_level="error") as tracker:
-     os.system("swift run -c release --package-path swift/montecarlopi")
+     os.system("./swift/montecarlopi/.build/release/montecarlopi")
 
 os.system("tsc ./typescript/montecarlopi.ts")
 with EmissionsTracker(project_name="typescript", log_level="error") as tracker:
