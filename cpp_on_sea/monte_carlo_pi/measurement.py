@@ -58,15 +58,16 @@ with EmissionsTracker(project_name="rust optimized", log_level="error") as track
      os.system("cargo run --manifest-path=./rust/pi_calculation/Cargo.toml --release")
 
 os.system("cargo build --manifest-path=./rust/pi_calculation/Cargo.toml")
-with EmissionsTracker(project_name="rust optimized", log_level="error") as tracker:
+with EmissionsTracker(project_name="rust", log_level="error") as tracker:
      os.system("cargo run --manifest-path=./rust/pi_calculation/Cargo.toml")
 
-os.system("kotlinc ./kotlin/dhondt.kt -include-runtime -d ./kotlin/montecarlopi.jar")
+os.system("kotlinc ./kotlin/montecarlopi.kt -include-runtime -d ./kotlin/montecarlopi.jar")
 with EmissionsTracker(project_name="kotlin", log_level="error") as tracker:
      os.system("java -jar ./kotlin/montecarlopi.jar")
 
+os.system("swift build -c release --package-path swift/montecarlopi")
 with EmissionsTracker(project_name="swift", log_level="error") as tracker:
-     os.system("swift ./swift/monte_carlo_pi.swift")
+     os.system("swift run -c release --package-path swift/montecarlopi")
 
 os.system("tsc ./typescript/montecarlopi.ts")
 with EmissionsTracker(project_name="typescript", log_level="error") as tracker:
