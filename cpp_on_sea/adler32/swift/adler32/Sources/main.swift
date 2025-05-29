@@ -1,26 +1,25 @@
 import Foundation
 
-func adler32Checksum(data: [UInt8]) -> UInt32 {
+func adler32Checksum(data: Data) -> UInt32 {
     let modAdler: UInt32 = 65521
     var a: UInt32 = 1
     var b: UInt32 = 0
 
-    for byte in data {
-        a = (a + UInt32(byte)) % modAdler
-        b = (b + a) % modAdler
+    data.withUnsafeBytes { (rawBuffer: UnsafeRawBufferPointer) in
+        let buffer = rawBuffer.bindMemory(to: UInt8.self)
+        for byte in buffer {
+            a = (a &+ UInt32(byte)) % modAdler
+            b = (b &+ a) % modAdler
+        }
     }
 
     return (b << 16) | a
 }
 
-// Generate or load 50 million bytes of data
+// Generate 50 million random bytes efficiently as Data
 let dataCount = 50_000_000
-var byteArray = [UInt8]() 
-byteArray.reserveCapacity(dataCount)
-for _ in 0..<dataCount {
-    byteArray.append(UInt8.random(in: 0...255))
-}
+let data = Data((0..<dataCount).map { _ in UInt8.random(in: 0...255) })
 
 // Compute Adler-32
-let checksum = adler32Checksum(data: byteArray)
-print(String(format: "Adler-32 Checksum: 0x%08X", checksum))
+let checksum = adler32Checksum(data: data)
+print(String(format: "Adler32 Checksum: 0x%08X", checksum))
